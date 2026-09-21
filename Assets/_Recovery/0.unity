@@ -1394,7 +1394,6 @@ MonoBehaviour:
   spriteDown: {fileID: 1425464976}
   spriteLeft: {fileID: 1057468939}
   spriteRight: {fileID: 2007676484}
-  animator: {fileID: 0}
 --- !u!4 &839001024
 Transform:
   m_ObjectHideFlags: 0
@@ -1494,7 +1493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1057468940
 SpriteRenderer:
   serializedVersion: 2
@@ -3008,7 +3007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1425464977
 SpriteRenderer:
   serializedVersion: 2
@@ -3637,7 +3636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &2007676485
 SpriteRenderer:
   serializedVersion: 2
@@ -3814,7 +3813,7 @@ Animator:
   m_GameObject: {fileID: 2009733219}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 30e7456dbaaf38e4182bdbe42ac21d56, type: 2}
+  m_Controller: {fileID: 9100000, guid: d8c762000ffbebf4daf9291cf6069c36, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

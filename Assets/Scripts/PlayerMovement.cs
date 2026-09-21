@@ -11,6 +11,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private GameObject spriteDown;
     [SerializeField] private GameObject spriteLeft;
     [SerializeField] private GameObject spriteRight;
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {
@@ -56,5 +57,15 @@ public class MovementController : MonoBehaviour
             
             default: direction = Vector2.zero; break;
         }
+        
+    }
+
+    private void HandleAnimation()
+    {
+        if (Keyboard.current.wKey.isPressed)
+        {
+            animator.Play("WalkUp");
+        }
+        
     }
 }
