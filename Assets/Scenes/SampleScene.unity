@@ -1389,12 +1389,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb868eb1e8bec4d4abf57d70f4e9b55c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 0.7
-  spriteUp: {fileID: 2009733219}
-  spriteDown: {fileID: 1425464976}
-  spriteLeft: {fileID: 1057468939}
-  spriteRight: {fileID: 2007676484}
-  animator: {fileID: 0}
+  speed: 0.3
+  spriteUp: {fileID: 2009733222}
+  spriteDown: {fileID: 1425464980}
+  spriteLeft: {fileID: 1057468942}
+  spriteRight: {fileID: 2007676487}
 --- !u!4 &839001024
 Transform:
   m_ObjectHideFlags: 0
@@ -1404,7 +1403,7 @@ Transform:
   m_GameObject: {fileID: 839001022}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.16, y: 1.62, z: -1}
+  m_LocalPosition: {x: -4.15, y: 1.704, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1488,6 +1487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1057468941}
   - component: {fileID: 1057468940}
+  - component: {fileID: 1057468942}
   m_Layer: 0
   m_Name: Left
   m_TagString: Untagged
@@ -1569,6 +1569,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 839001024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1057468942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057468939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03e09275b5b38945a9b237a87142302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandleAnimation
+  idleSprite: {fileID: -2079045116, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  animationSprites:
+  - {fileID: 1688615887, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: 860142812, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: 1830182489, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: -2079045116, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  animationTime: 0.25
+  loop: 1
 --- !u!1 &1187117579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,6 +3022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1425464978}
   - component: {fileID: 1425464977}
+  - component: {fileID: 1425464980}
   m_Layer: 0
   m_Name: Down
   m_TagString: Untagged
@@ -3083,6 +3104,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 839001024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1425464980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425464976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03e09275b5b38945a9b237a87142302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandleAnimation
+  idleSprite: {fileID: 306372094466807954, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  animationSprites:
+  - {fileID: -9078394528372511491, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: -1174024930709599545, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: -3763208851180502378, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: 306372094466807954, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  animationTime: 0.25
+  loop: 1
 --- !u!1 &1910581290
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,7 +3243,7 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -3631,6 +3672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2007676486}
   - component: {fileID: 2007676485}
+  - component: {fileID: 2007676487}
   m_Layer: 0
   m_Name: Right
   m_TagString: Untagged
@@ -3712,6 +3754,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 839001024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2007676487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007676484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03e09275b5b38945a9b237a87142302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandleAnimation
+  idleSprite: {fileID: 1463979936, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  animationSprites:
+  - {fileID: -54830398, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: 1103279468, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: -362078199, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: 1463979936, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  animationTime: 0.25
+  loop: 1
 --- !u!1 &2009733219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,7 +3791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &2009733220
 SpriteRenderer:
   serializedVersion: 2
@@ -3804,28 +3866,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 839001024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2009733222
-Animator:
-  serializedVersion: 7
+--- !u!114 &2009733222
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009733219}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 30e7456dbaaf38e4182bdbe42ac21d56, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03e09275b5b38945a9b237a87142302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandleAnimation
+  idleSprite: {fileID: -709575133154121010, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  animationSprites:
+  - {fileID: -537476504602637214, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: 8202784989893447847, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: -2867441035029265516, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  - {fileID: -709575133154121010, guid: f5b0bd3e0bbc38b4aa2192320c317b71, type: 3}
+  animationTime: 0.25
+  loop: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

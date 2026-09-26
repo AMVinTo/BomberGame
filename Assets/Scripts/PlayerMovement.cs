@@ -7,11 +7,11 @@ public class MovementController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 direction = Vector2.down;
     [SerializeField] private float speed = 5f;
-    [SerializeField] private GameObject spriteUp;
-    [SerializeField] private GameObject spriteDown;
-    [SerializeField] private GameObject spriteLeft;
-    [SerializeField] private GameObject spriteRight;
-    [SerializeField] private Animator animator;
+    private HandleAnimation handleAnim;
+    [SerializeField] private HandleAnimation spriteUp;
+    [SerializeField] private HandleAnimation spriteDown;
+    [SerializeField] private HandleAnimation spriteLeft;
+    [SerializeField] private HandleAnimation spriteRight;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
-       
+        HandleDirection();
     }
 
     private void FixedUpdate()
@@ -30,16 +30,19 @@ public class MovementController : MonoBehaviour
         Vector2 position = rb.position;
         Vector2 translation = speed * Time.fixedDeltaTime * direction;
         rb.MovePosition(position + translation);
-        HandleDirection();
+        
     }
 
-    private void SetDirection(Vector2 newDirection, GameObject newSprite)
+    private void SetDirection(Vector2 newDirection,HandleAnimation newSpriteRenderer)
     {
         direction = newDirection;
-        spriteUp.SetActive(newSprite == spriteUp);
-        spriteDown.SetActive(newSprite == spriteDown);
-        spriteLeft.SetActive(newSprite == spriteLeft);
-        spriteRight.SetActive(newSprite == spriteRight);
+        spriteUp.gameObject.SetActive(newSpriteRenderer == spriteUp);
+        spriteDown.gameObject.SetActive(newSpriteRenderer == spriteDown);
+        spriteLeft.gameObject.SetActive(newSpriteRenderer == spriteLeft);
+        spriteRight.gameObject.SetActive(newSpriteRenderer == spriteRight);
+
+        handleAnim = newSpriteRenderer;
+        handleAnim.SetMoving(true);
     }
     
     private void HandleDirection()
@@ -55,17 +58,24 @@ public class MovementController : MonoBehaviour
             
             case true when Keyboard.current.dKey.isPressed: SetDirection(Vector2.right, spriteRight); break;
             
-            default: direction = Vector2.zero; break;
+            default: 
+                direction = Vector2.zero;
+                handleAnim.SetMoving(false);
+                break;
         }
         
     }
 
-    private void HandleAnimation()
+   /* private void HandleAnimation()
     {
-        if (Keyboard.current.wKey.isPressed)
+        if (direction == Vector2.up)
         {
             animator.Play("WalkUp");
         }
+        else if (Keyboard.current.sKey.isPressed)
+        {
+            animator.Play("WalkDown");
+        }
         
-    }
+    }*/
 }
