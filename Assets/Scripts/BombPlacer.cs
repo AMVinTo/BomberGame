@@ -1,18 +1,16 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class BombPlacer : MonoBehaviour
 {
     [SerializeField] private GameObject bombPrefab;
-
-    void Start()
-    {
-        
-    }
+    [SerializeField] private int maxBombs = 1;
+    private int activeBombs;
 
     void Update()
     {
-        if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
+        if (Keyboard.current.qKey.wasPressedThisFrame)
         {
             PlaceBomb();
         }
@@ -20,7 +18,23 @@ public class BombPlacer : MonoBehaviour
 
     private void PlaceBomb()
     {
-        Instantiate(bombPrefab ,  transform.position , Quaternion.identity);
+        if (activeBombs >= maxBombs)
+            return;
+
+        GameObject bomb = Instantiate(
+            bombPrefab,
+            transform.position,
+            Quaternion.identity
+        );
+
+        BombController bombController = bomb.GetComponent<BombController>();
+        bombController.SetBombPlacer(this);
+        activeBombs++;
+    }
+    
+    public void BombExploded()
+    {
+        activeBombs--;
     }
 }
 

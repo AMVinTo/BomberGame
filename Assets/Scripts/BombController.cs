@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class HandleBomb : MonoBehaviour
+public class BombController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float explosionTime = 3f;
+    private BombPlacer bombPlacer;
+
+    public void SetBombPlacer(BombPlacer placer)
     {
-        
+        bombPlacer = placer;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Explode()
     {
-        
+        Debug.Log("Explode");
+        bombPlacer.BombExploded();
+        Destroy(gameObject);
     }
+    void Start()
+    {
+        Invoke(nameof(Explode),explosionTime);
+    }
+    
 }
