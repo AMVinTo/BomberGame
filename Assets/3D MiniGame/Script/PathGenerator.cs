@@ -8,6 +8,9 @@ public class PathGenerator : MonoBehaviour
     [SerializeField] private float chunkLength = 10f;
     [SerializeField] private  int initialChunks = 10;
     [SerializeField] private  int chunksAhead = 5;
+    [SerializeField] private float gapDistance = 0.5f;
+    [SerializeField] private float gapChance = 0.3f;
+  
     private List<GameObject> chunks = new List<GameObject>();
 
 
@@ -55,8 +58,13 @@ public class PathGenerator : MonoBehaviour
         {
             GameObject lastChunk = chunks[chunks.Count - 1];
             spawnZ = lastChunk.transform.position.z + chunkLength;
-        }
 
+            if (Random.value < gapChance)
+            {
+                spawnZ += gapDistance;
+            }
+        }
+        
         Vector3 spawnPosition = new Vector3(
             0f,
             0f,
