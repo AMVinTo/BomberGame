@@ -10,7 +10,9 @@ public class PathGenerator : MonoBehaviour
     [SerializeField] private  int chunksAhead = 5;
     [SerializeField] private float gapDistance = 0.5f;
     [SerializeField] private float gapChance = 0.3f;
-  
+    [SerializeField] private GameObject stickPrefab;
+    [SerializeField] private int sticksPerChunk = 3;
+    
     private List<GameObject> chunks = new List<GameObject>();
 
 
@@ -79,6 +81,22 @@ public class PathGenerator : MonoBehaviour
 
         newChunk.name = "Chunk_" + chunks.Count;
         chunks.Add(newChunk);
+        
+        for (int i = 0; i < sticksPerChunk; i++)
+        {
+            float randomX = Random.Range(-0.5f, 0.5f);
+            float randomZ = Random.Range(-1f, 1f);
+
+            Vector3 stickPosition = new Vector3(randomX, 0.75f, randomZ);
+
+            GameObject stick = Instantiate(
+                stickPrefab,
+                newChunk.transform
+            );
+
+            stick.transform.localPosition = stickPosition;
+            stick.transform.localRotation = Quaternion.identity;
+        }
     }
 
     
