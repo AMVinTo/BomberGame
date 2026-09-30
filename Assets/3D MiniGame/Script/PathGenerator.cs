@@ -14,11 +14,8 @@ public class PathGenerator : MonoBehaviour
     [SerializeField] private int sticksPerChunk = 3;
     
     private List<GameObject> chunks = new List<GameObject>();
-
-
     void Start()
     {
-      
         for (int i = 0; i < initialChunks; i++)
         {
             SpawnChunk();
@@ -32,11 +29,9 @@ public class PathGenerator : MonoBehaviour
         GenerateChunks();
         DeleteChunks();
     }
- 
     void GenerateChunks()
     {
         float playerZ = player.position.z;
-
         float lastChunkZ = 0f;
 
         if (chunks.Count > 0)
@@ -50,8 +45,6 @@ public class PathGenerator : MonoBehaviour
         }
     }
 
-
- 
     void SpawnChunk()
     {
         float spawnZ = 0f;
@@ -66,7 +59,6 @@ public class PathGenerator : MonoBehaviour
                 spawnZ += gapDistance;
             }
         }
-        
         Vector3 spawnPosition = new Vector3(
             0f,
             0f,
@@ -81,7 +73,6 @@ public class PathGenerator : MonoBehaviour
 
         newChunk.name = "Chunk_" + chunks.Count;
         chunks.Add(newChunk);
-        
         for (int i = 0; i < sticksPerChunk; i++)
         {
             float randomX = Random.Range(-0.5f, 0.5f);
@@ -99,8 +90,6 @@ public class PathGenerator : MonoBehaviour
         }
     }
 
-    
-
     void DeleteChunks()
     {
         while (chunks.Count > 0)
@@ -116,7 +105,6 @@ public class PathGenerator : MonoBehaviour
             float chunkEndZ =
                 firstChunk.transform.position.z + chunkLength;
 
-        
             if (player.position.z > chunkEndZ)
             {
                 chunks.RemoveAt(0);
