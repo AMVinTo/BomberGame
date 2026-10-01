@@ -343,7 +343,6 @@ GameObject:
   - component: {fileID: 965721171}
   - component: {fileID: 965721173}
   - component: {fileID: 965721172}
-  - component: {fileID: 965721174}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Player
@@ -549,7 +548,7 @@ MonoBehaviour:
   checkDistance: 0.31
   checkHeight: 0.5
   bridgeStickPrefab: {fileID: 1480638871933224438, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-  bridgeHeight: 0
+  bridgeHeight: 0.35
   stickPlaceInterval: 0.08
   maxBridgeSticks: 30
 --- !u!114 &965721173
@@ -565,18 +564,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StickInventory
   stickCount: 40
---- !u!114 &965721174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 965721163}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 036c34311abaa7040b048978a9dcc0be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BridgeBuilder
 --- !u!1 &1406486387
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,63 +754,6 @@ Transform:
   - {fileID: 965721164}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1945986789263264369
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 424670924556798331, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.93144
-      objectReference: {fileID: 0}
-    - target: {fileID: 424670924556798331, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 424670924556798331, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 149.0316
-      objectReference: {fileID: 0}
-    - target: {fileID: 424670924556798331, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 424670924556798331, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 424670924556798331, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 424670924556798331, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 424670924556798331, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 424670924556798331, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 424670924556798331, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1480638871933224438, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
-      propertyPath: m_Name
-      value: Cube
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -833,4 +763,3 @@ SceneRoots:
   - {fileID: 1406486388}
   - {fileID: 2127557855}
   - {fileID: 817711804}
-  - {fileID: 1945986789263264369}
