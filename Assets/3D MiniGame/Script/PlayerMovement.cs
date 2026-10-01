@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private  float forwardSpeed = 5f;
+    [SerializeField] private float sideSpeed = 5f;
     [SerializeField] private  float gravity = -20f;
 
     private CharacterController controller;
@@ -25,10 +27,19 @@ public class PlayerMovement : MonoBehaviour
 
         verticalVelocity += gravity * Time.deltaTime;
         
-        Vector3 movement = new Vector3(
-            0f,
-            verticalVelocity,
-            forwardSpeed
+        //float horizontalInput = Input.GetAxis("Horizontal");
+        
+        float horizontalInput = 0f;
+
+        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
+        {
+            horizontalInput = -1f;
+        }
+        else if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+        {
+            horizontalInput = 1f;
+        }
+        Vector3 movement = new Vector3(horizontalInput * sideSpeed,verticalVelocity,forwardSpeed
         );
 
         movement *= Time.deltaTime;
