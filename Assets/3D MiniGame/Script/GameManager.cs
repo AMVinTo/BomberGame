@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOverManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject endGamePanel;
     private float fallHeight = -5f;
     private bool gameOver = false;
+    private bool endGame = false;
 
     void Start()
     {
@@ -15,33 +17,41 @@ public class GameOverManager : MonoBehaviour
 
     void Update()
     {
-        if (gameOver)
+        if (gameOver || endGame)
             return;
-
         if (player == null)
             return;
-
         if (player.position.y < fallHeight)
         {
             GameOver();
         }
     }
 
-    void GameOver()
+    private void GameOver()
     {
         gameOver = true;
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
     }
 
+
+
+    public void EndGame()
+    {
+        if (gameOver || endGame)
+            return;
+        endGame = true;
+        Debug.Log("game Done");
+        endGamePanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
     public void Retry()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().buildIndex
-        );
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
+    
     public void Menu()
     {
 
