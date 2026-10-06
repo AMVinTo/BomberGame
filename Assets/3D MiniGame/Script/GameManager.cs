@@ -41,9 +41,9 @@ public class GameManager : MonoBehaviour
         if (gameOver || endGame)
             return;
         endGame = true;
-        Debug.Log("game Done");
+        Debug.Log("Game Done");
         endGamePanel.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0.1f;
     }
 
     public void Retry()
