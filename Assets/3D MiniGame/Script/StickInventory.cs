@@ -14,7 +14,7 @@ public class StickInventory : MonoBehaviour
     private int lastStickCount = 0;
     private void Update()
     {
-        displayText.text = "Sticks: " + stickCount;
+        displayText.text = "X " + stickCount;
         if (stickCount != lastStickCount)
         {
             UpdateVisualSticks();
@@ -55,7 +55,7 @@ public class StickInventory : MonoBehaviour
         for (int i = 0; i < visualSticks.Count; i++)
         {
             visualSticks[i].transform.localPosition =
-                new Vector3(0f , 1+ i * stickSpacing, 0f );
+                new Vector3(0f , 1+ i * stickSpacing, -0.8f );
         }
     }
 }
