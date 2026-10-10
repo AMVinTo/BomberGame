@@ -1,119 +1,127 @@
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PathGenerator : MonoBehaviour
 {
-    [SerializeField] private  GameObject groundChunk;
-    [SerializeField] private  Transform player;
+    [Header("Ground")]
+    [SerializeField] private GameObject groundChunkPrefab;
+    [SerializeField] private Transform player;
+    [SerializeField] private int poolSize = 20;
     [SerializeField] private float chunkLength = 10f;
-    [SerializeField] private  int initialChunks = 10;
-    [SerializeField] private  int chunksAhead = 5;
-    [SerializeField] private float gapDistance = 0.5f;
+    [Header("Gaps")]
+    [Range(0f, 1f)]
     [SerializeField] private float gapChance = 0.3f;
+    [SerializeField] private int minRequiredSticks = 5;
+    [SerializeField] private int maxRequiredSticks = 10;
+    [SerializeField] private float stickLength = 0.3f;
+    [Header("Sticks")]
     [SerializeField] private GameObject stickPrefab;
-    [SerializeField] private int sticksPerChunk = 3;
-    
-    private List<GameObject> chunks = new List<GameObject>();
-    void Start()
+    [SerializeField] private int sticksPerChunk = 15;
+    [SerializeField] private float stickHeight = 0.75f;
+    private readonly List<GameObject> chunks = new();
+    private readonly Dictionary<GameObject, List<GameObject>>
+        chunkSticks = new();
+
+    private readonly Dictionary<GameObject, int>
+        gapBeforeChunk = new();
+
+    private void Start()
     {
-        for (int i = 0; i < initialChunks; i++)
+        for (int i = 0; i < poolSize; i++)
         {
-            SpawnChunk();
-        }
-    }
-    void Update()
-    {
-        if (player == null)
-            return;
-
-        GenerateChunks();
-        DeleteChunks();
-    }
-    void GenerateChunks()
-    {
-        float playerZ = player.position.z;
-        float lastChunkZ = 0f;
-
-        if (chunks.Count > 0)
-        {
-            lastChunkZ = chunks[chunks.Count - 1].transform.position.z;
-        }
-        while (lastChunkZ < playerZ + chunksAhead * chunkLength)
-        {
-            SpawnChunk();
-            lastChunkZ = chunks[chunks.Count - 1].transform.position.z;
-        }
-    }
-
-    void SpawnChunk()
-    {
-        float spawnZ = 0f;
-
-        if (chunks.Count > 0)
-        {
-            GameObject lastChunk = chunks[chunks.Count - 1];
-            spawnZ = lastChunk.transform.position.z + chunkLength;
-
-            if (Random.value < gapChance)
-            {
-                spawnZ += gapDistance;
-            }
-        }
-        Vector3 spawnPosition = new Vector3(
-            0f,
-            0f,
-            spawnZ
-        );
-
-        GameObject newChunk = Instantiate(
-            groundChunk,
-            spawnPosition,
-            Quaternion.identity
-        );
-
-        newChunk.name = "Chunk_" + chunks.Count;
-        chunks.Add(newChunk);
-        for (int i = 0; i < sticksPerChunk; i++)
-        {
-            float randomX = Random.Range(-0.5f, 0.5f);
-            float randomZ = Random.Range(-1f, 1f);
-
-            Vector3 stickPosition = new Vector3(randomX, 0.75f, randomZ);
-
-            GameObject stick = Instantiate(
-                stickPrefab,
-                newChunk.transform
+            GameObject chunk = Instantiate(
+                groundChunkPrefab,
+                Vector3.zero,
+                Quaternion.identity,
+                transform
             );
 
-            stick.transform.localPosition = stickPosition;
-            stick.transform.localRotation = Quaternion.identity;
+            chunk.name = "GroundChunk_" + i;
+            chunk.SetActive(true);
+
+            chunks.Add(chunk);
+            CreateSticks(chunk);
+        }
+
+        chunks[0].transform.position = Vector3.zero;
+        gapBeforeChunk[chunks[0]] = 0;
+        for (int i = 1; i < chunks.Count; i++)
+        {
+            PlaceAfter(chunks[i], chunks[i - 1]);
+        }
+
+        Debug.Log($"PathGenerator: Created {chunks.Count} ground chunks.");
+    }
+    
+    private void CreateSticks(GameObject chunk)
+    {
+        List<GameObject> sticks = new();
+        for (int i = 0; i < sticksPerChunk; i++)
+        {
+            GameObject stick = Instantiate(stickPrefab,chunk.transform);
+            stick.name = "Stick_" + i;
+            sticks.Add(stick);
+        }
+        chunkSticks[chunk] = sticks;
+        ResetSticks(chunk);
+    }
+
+    private void PlaceAfter(GameObject chunk, GameObject previous)
+    {
+        int required = 0;
+
+        if (Random.value < gapChance)
+        {
+            required = Random.Range(minRequiredSticks,maxRequiredSticks + 1);
+        }
+
+        float gapWidth = required * stickLength;
+        Vector3 position = previous.transform.position;
+        position.z += chunkLength + gapWidth;
+        chunk.transform.position = position;
+        gapBeforeChunk[chunk] = required;
+    }
+
+    private void Update()
+    {
+        if (player == null || chunks.Count < 2)
+            return;
+        while (player.position.z >
+               chunks[0].transform.position.z + chunkLength)
+        {
+            GameObject firstChunk = chunks[0];
+            chunks.RemoveAt(0);
+            GameObject lastChunk = chunks[chunks.Count - 1];
+            PlaceAfter(firstChunk, lastChunk);
+            ResetSticks(firstChunk);
+            chunks.Add(firstChunk);
         }
     }
 
-    void DeleteChunks()
+    private void ResetSticks(GameObject chunk)
     {
-        while (chunks.Count > 0)
+        if (!chunkSticks.TryGetValue(chunk, out List<GameObject> sticks))
+            return;
+        foreach (GameObject stick in sticks)
         {
-            GameObject firstChunk = chunks[0];
-
-            if (firstChunk == null)
-            {
-                chunks.RemoveAt(0);
+            if (stick == null)
                 continue;
-            }
-
-            float chunkEndZ =
-                firstChunk.transform.position.z + chunkLength;
-
-            if (player.position.z > chunkEndZ)
-            {
-                chunks.RemoveAt(0);
-                Destroy(firstChunk);
-            }
-            else
-            {
-                break;
-            }
+            stick.transform.SetParent(chunk.transform, false);
+            float randomX = Random.Range(-0.5f, 0.5f);
+            float randomZ = Random.Range(-1f, 0.5f);
+            stick.transform.localPosition = new Vector3(randomX,stickHeight,randomZ);
+            stick.transform.localRotation = Quaternion.identity;
+            stick.SetActive(true);
         }
+    }
+    public int GetRequiredSticksForGap(GameObject chunk)
+    {
+        if (chunk != null &&
+            gapBeforeChunk.TryGetValue(chunk, out int required))
+        {
+            return required;
+        }
+        return 0;
     }
 }

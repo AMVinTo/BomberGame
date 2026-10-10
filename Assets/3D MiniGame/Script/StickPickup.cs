@@ -13,7 +13,7 @@ public class StickPickup : MonoBehaviour
             if (inventory != null)
             {
                 inventory.AddStick(stickAmount);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }

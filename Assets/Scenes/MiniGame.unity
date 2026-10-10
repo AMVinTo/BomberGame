@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ddbabea54bc54b4895300948cdd9157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StickInventory
-  stickCount: 10
+  stickCount: 100
   displayText: {fileID: 984948980}
   stickPrefab: {fileID: 1480638871933224438, guid: 9d04a9efd0065f9428ef37a48cea9fd0, type: 3}
   stickHolder: {fileID: 335065575}
@@ -1910,7 +1910,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9452ae1262a74094f8a68013fbcd1834, type: 2}
+  - {fileID: 2100000, guid: f19afc5d4397c354e9bb27f6ec6d48f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2114,15 +2114,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca448774ef7edd4badab8b3cdeb1f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PathGenerator
-  groundChunk: {fileID: 4547559141157422100, guid: 3ea53a7c0db0e374dad450917da24a33, type: 3}
+  groundChunkPrefab: {fileID: 4547559141157422100, guid: 3ea53a7c0db0e374dad450917da24a33, type: 3}
   player: {fileID: 335065575}
+  poolSize: 5
   chunkLength: 10
-  initialChunks: 10
-  chunksAhead: 5
-  gapDistance: 5
-  gapChance: 0.35
+  gapChance: 0.4
+  minRequiredSticks: 5
+  maxRequiredSticks: 10
+  stickLength: 0.5
   stickPrefab: {fileID: 548072023387613780, guid: 2a089b2a1e0d46548a38b480b4d4a24d, type: 3}
   sticksPerChunk: 3
+  stickHeight: 0.75
 --- !u!4 &817711804
 Transform:
   m_ObjectHideFlags: 0
@@ -5591,7 +5593,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9452ae1262a74094f8a68013fbcd1834, type: 2}
+  - {fileID: 2100000, guid: f19afc5d4397c354e9bb27f6ec6d48f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6240,7 +6242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2094998592
 Transform:
   m_ObjectHideFlags: 0
