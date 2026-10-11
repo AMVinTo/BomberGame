@@ -124,4 +124,29 @@ public class PathGenerator : MonoBehaviour
         }
         return 0;
     }
+    
+    public void SetInitialSettings(
+        int newSticksPerChunk,
+        float newGapChance,
+        int newMinRequiredSticks,
+        int newMaxRequiredSticks)
+    {
+        sticksPerChunk = Mathf.Max(0, newSticksPerChunk);
+        SetGapSettings(
+            newGapChance,
+            newMinRequiredSticks,
+            newMaxRequiredSticks);
+    }
+
+    public void SetGapSettings(
+        float newGapChance,
+        int newMinRequiredSticks,
+        int newMaxRequiredSticks)
+    {
+        gapChance = Mathf.Clamp01(newGapChance);
+        minRequiredSticks = Mathf.Max(0, newMinRequiredSticks);
+        maxRequiredSticks = Mathf.Max(
+            minRequiredSticks, newMaxRequiredSticks);
+    }
+    
 }
