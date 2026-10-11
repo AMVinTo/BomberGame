@@ -45,4 +45,10 @@ public class PlayerMovement : MonoBehaviour
         movement *= Time.deltaTime;
         controller.Move(movement);
     }
+    
+    public void SetForwardSpeed(float newSpeed)
+    {
+        forwardSpeed = newSpeed;
+    }
+    
 }

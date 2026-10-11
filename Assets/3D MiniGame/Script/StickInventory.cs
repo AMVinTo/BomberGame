@@ -12,6 +12,14 @@ public class StickInventory : MonoBehaviour
     [SerializeField] private float stickSpacing = 0.25f;
     private List<GameObject> visualSticks = new List<GameObject>();
     private int lastStickCount = 0;
+    
+    public void SetInitialSticks(int amount)
+    {
+        stickCount = Mathf.Max(0, amount);
+        UpdateVisualSticks();
+        lastStickCount = stickCount;
+    }
+    
     private void Update()
     {
         displayText.text = "X " + stickCount;
